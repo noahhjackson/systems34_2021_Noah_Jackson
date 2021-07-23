@@ -131,7 +131,6 @@ while True:
         point_2.switch_point(1)
         print("Point 2 right")
 
-
     print("Throttle " + str(train_direction) + ", " + str(train_speed))
     print("Locator: " + str(locator_input))
 
