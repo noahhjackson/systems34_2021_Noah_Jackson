@@ -61,17 +61,35 @@ class Point:
         self.right = right
         GPIO.setup(self.left, GPIO.OUT)
         GPIO.setup(self.right, GPIO.OUT)
+        # https://docs.python.org/3/tutorial/classes.html
+        self.value_return = []
 
     def switch_point(self, point_side):  # left or right, can also be 0 or 1
         if point_side == "left" or point_side == 0:
-            GPIO.output(self.left, GPIO.HIGH)
-            time.sleep(0.5)
-            GPIO.output(self.left, GPIO.LOW)
+
+            if Point.read(self) == 1 or Point.read(self) == []:
+                GPIO.output(self.left, GPIO.HIGH)
+                time.sleep(0.5)
+                GPIO.output(self.left, GPIO.LOW)
+
+                self.value_return = 0  # returns the value of the switch
+
+            else:
+                self.value_return = 0  # returns the value of the switch
 
         if point_side == "right" or point_side == 1:
-            GPIO.output(self.right, GPIO.HIGH)
-            time.sleep(0.5)
-            GPIO.output(self.right, GPIO.LOW)
+            if Point.read(self) == 0 or Point.read(self) == []:
+                GPIO.output(self.right, GPIO.HIGH)
+                time.sleep(0.5)
+                GPIO.output(self.right, GPIO.LOW)
+
+                self.value_return = 1  # returns the value of the switch
+
+            else:
+                self.value_return = 1  # returns the value of the switch
+
+    def read(self):
+        return self.value_return
 
 
 class Locomotive:
@@ -85,15 +103,17 @@ class Locomotive:
             if GPIO.input(pwm_ok) == GPIO.HIGH:  # Checking that the motor driver is working properly
                 GPIO.output(M1D, direction)
                 TrackPWM.start(speed)
+
                 return direction, speed
 
-        if self.pwr == 0:  # pneumatic
+        #if self.pwr == 0:  # pneumatic
             # some code that allows for pneumatic motors to be operated. or whatever
-            return direction, speed
 
     def stop(self):
         if self.pwr == 1:  # electric locomotive
             TrackPWM.stop()
+
+            return 0, 0 # direction and speed
 
         #if self.pwr == 0:  # pneumatic
             # some code that allows for pneumatic solenoids to be stopped. or whatever
@@ -104,32 +124,38 @@ class Locomotive:
 point_1 = Point(IN1, IN2)
 point_2 = Point(IN3, IN4)
 
-point_1.switch_point(1)
-print("Point 1 right")
-point_2.switch_point(1)
-print("Point 2 right")
+print("point_1:" + str(point_1.read()))  # returns the value of the switch
+print("point_1:" + str(point_2.read()))  # returns the value of the switch
 
-train_speed = int(input("Speed 0-100: "))
-train_direction = int(input("Direction 1 or 0: "))
+point_1.switch_point(1)
+print("point_1:" + str(point_1.read()))  # returns the value of the switch
+point_2.switch_point(1)
+print("point_1:" + str(point_2.read()))  # returns the value of the switch
 
 train = Locomotive(1)
 
 while True:
     track_enable(1)
-    locator_input = input("Stop location (T1-9): ")
-    train_locator = locator[locator_input]
+
+    train_speed = int(input("Speed 0-100: "))  # an input for the loco speed
+    train_direction = int(input("Direction 1 or 0: "))  # an input for the loco direction
+
+    locator_input = input("Stop location (T1-9): ")  # an input for the desired locator
+    train_locator = locator[locator_input]  # a dict function that translates human readable T# values into pi GPIO
 
     if locator_input == "T8":
-        point_1.switch_point(0)
-        print("Point 1 right")
-        point_2.switch_point(0)
-        print("Point 2 left")
+        point_1.switch_point(0)  # switches the track if its not already in the right position
+        print("point_1:" + str(point_1.read()))  # returns the value of the switch
+
+        point_2.switch_point(0)  # switches the track if its not already in the right position
+        print("point_2:" + str(point_2.read()))  # returns the value of the switch
 
     else:
-        point_1.switch_point(1)
-        print("Point 1 right")
-        point_2.switch_point(1)
-        print("Point 2 right")
+        point_1.switch_point(1)  # switches the track if its not already in the right position
+        print("point_1:" + str(point_1.read()))  # returns the value of the switch
+
+        point_2.switch_point(1)  # switches the track if its not already in the right position
+        print("point_2:" + str(point_2.read()))  # returns the value of the switch
 
     print("Throttle " + str(train_direction) + ", " + str(train_speed))
     print("Locator: " + str(locator_input))
@@ -140,6 +166,3 @@ while True:
     train.stop()
     print("stopped")
     track_enable(0)
-
-
-    #another test
