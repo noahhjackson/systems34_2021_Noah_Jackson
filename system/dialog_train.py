@@ -19,6 +19,10 @@ M2D = 37  # M2D
 M1P = 1  # channel numbering for PWM pins
 M2P = 0  # channel numbering for PWM pins
 
+# Solenoids
+S1 = 21
+GPIO.setup(S1, GPIO.OUT)
+
 
 # Track PWM pins
 # https://sourceforge.net/p/raspberry-gpio-python/wiki/Outputs/
@@ -106,17 +110,20 @@ class Locomotive:
 
                 return direction, speed
 
-        #if self.pwr == 0:  # pneumatic
-            # some code that allows for pneumatic motors to be operated. or whatever
+        if self.pwr == 0:  # pneumatic
+            if speed == 0:
+                GPIO.output(S1, GPIO.LOW)
+
+            if speed > 0:
+                GPIO.output(S1, GPIO.HIGH)
 
     def stop(self):
         if self.pwr == 1:  # electric locomotive
             TrackPWM.stop()
+            return 0, 0  # direction and speed
 
-            return 0, 0 # direction and speed
-
-        #if self.pwr == 0:  # pneumatic
-            # some code that allows for pneumatic solenoids to be stopped. or whatever
+        if self.pwr == 0:  # pneumatic
+            GPIO.output(S1, GPIO.LOW)
 
 
 # ------------------------- Track Sequence ------------------------------------
@@ -133,6 +140,7 @@ point_2.switch_point(1)
 print("point_1:" + str(point_2.read()))  # returns the value of the switch
 
 train = Locomotive(1)
+train_pneumatic = Locomotive(0)
 
 while True:
     track_enable(1)
@@ -162,7 +170,9 @@ while True:
 
     while GPIO.input(train_locator) == GPIO.HIGH:
         train.throttle(train_direction, train_speed)
+        train_pneumatic.throttle(train_direction, train_speed)
 
     train.stop()
+    train_pneumatic.stop()
     print("stopped")
     track_enable(0)
