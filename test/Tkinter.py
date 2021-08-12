@@ -1,5 +1,6 @@
 import tkinter
 from tkinter import *
+import time
 
 # https://www.tutorialspoint.com/python/tk_canvas.htm
 
@@ -20,45 +21,57 @@ def rectangle(h, k, a, b, thickness, outline, colour):
     y1_filling = k+b-thickness
     y2_filling = k-b+thickness
 
-    if colour == "red":
-        C.create_rectangle(x1, y1, x2, y2, fill="red")
-
-    if colour == "blue":
-        C.create_rectangle(x1, y1, x2, y2, fill="blue")
+    C.create_rectangle(x1, y1, x2, y2, fill=colour)
 
     if outline == 1:
         C.create_rectangle(x1_filling, y1_filling, x2_filling, y2_filling, fill="black")
 
-def locator(x, y):
-    rectangle(x, y, 20, 20, 0, 0, "red")
+
+class Locator:
+    def __init__(self, x, y, name):
+        self.x = x
+        self.y = y
+        self.name = name
+        rectangle(self.x, self.y, 20, 20, 0, 0, "red")
+        C.create_text(self.x, self.y, fill="white", font="Times 15 italic bold", text=self.name)
+
+    def detection(self):
+        rectangle(self.x, self.y, 20, 20, 0, 0, "green")
+
+        # https://www.codegrepper.com/code-examples/python/display+a+string+in+canvas+python+tkinter
+        C.create_text(self.x, self.y, fill="white", font="Times 15 italic bold", text=self.name)
+
+    def un_detection(self):
+        rectangle(self.x, self.y, 20, 20, 0, 0, "red")
+
+        # https://www.codegrepper.com/code-examples/python/display+a+string+in+canvas+python+tkinter
+        C.create_text(self.x, self.y, fill="white", font="Times 15 italic bold", text=self.name)
+
+def test():
+    T1.detection()
+
+def un_test():
+    T1.un_detection()
 
 
 rectangle(width_window/2, height_window/2, 500*0.7, 300*0.7, 5, 1, "blue")
 rectangle(width_window/2, height_window/2-167.5, 200*0.7, 60*0.7, 5, 1, "blue")
 
-locator(165, 80)
-locator(165, 80+200)
-locator(165, 80+415)
+T6 = Locator(165, 80, "T6")
+T5 = Locator(165, 80+200, "T5")
+T4 = Locator(165, 80+415, "T4")
 
-locator(510, 80)
-locator(510, 160)
-locator(510, 80+415)
+T7 = Locator(510, 80, "T7")
+T8 = Locator(510, 160, "T8")
+T3 = Locator(510, 80+415, "T3")
 
-locator(860, 80)
-locator(860, 80+200)
-locator(860, 80+415)
+T9 = Locator(860, 80, "T9")
+T1 = Locator(860, 80+200, "T1")
+T2 = Locator(860, 80+415, "T2")
 
 
-# https://www.codegrepper.com/code-examples/python/display+a+string+in+canvas+python+tkinter
-T1 = C.create_text(860, 80+200, fill="white", font="Times 15 italic bold", text="T1")
-T2 = C.create_text(860, 80+415, fill="white", font="Times 15 italic bold", text="T2")
-T3 = C.create_text(510, 80+415, fill="white", font="Times 15 italic bold", text="T3")
-T4 = C.create_text(165, 80+415, fill="white", font="Times 15 italic bold", text="T4")
-T5 = C.create_text(165, 80+200, fill="white", font="Times 15 italic bold", text="T5")
-T6 = C.create_text(165, 80, fill="white", font="Times 15 italic bold", text="T6")
-T7 = C.create_text(510, 80, fill="white", font="Times 15 italic bold", text="T7")
-T8 = C.create_text(510, 160, fill="white", font="Times 15 italic bold", text="T8")
-T9 = C.create_text(860, 80, fill="white", font="Times 15 italic bold", text="T9")
+Button(top,text='Test',command=lambda:test()).pack(expand=True)  # https://pythonguides.com/python-tkinter-mainloop/
+Button(top,text='UN Test',command=lambda:un_test()).pack(expand=True)
 
 C.pack(fill="both", expand=True)
 top.mainloop()
