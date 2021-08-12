@@ -48,5 +48,17 @@ locator(860, 80)
 locator(860, 80+200)
 locator(860, 80+415)
 
+
+# https://www.codegrepper.com/code-examples/python/display+a+string+in+canvas+python+tkinter
+T1 = C.create_text(860, 80+200, fill="white", font="Times 15 italic bold", text="T1")
+T2 = C.create_text(860, 80+415, fill="white", font="Times 15 italic bold", text="T2")
+T3 = C.create_text(510, 80+415, fill="white", font="Times 15 italic bold", text="T3")
+T4 = C.create_text(165, 80+415, fill="white", font="Times 15 italic bold", text="T4")
+T5 = C.create_text(165, 80+200, fill="white", font="Times 15 italic bold", text="T5")
+T6 = C.create_text(165, 80, fill="white", font="Times 15 italic bold", text="T6")
+T7 = C.create_text(510, 80, fill="white", font="Times 15 italic bold", text="T7")
+T8 = C.create_text(510, 160, fill="white", font="Times 15 italic bold", text="T8")
+T9 = C.create_text(860, 80, fill="white", font="Times 15 italic bold", text="T9")
+
 C.pack(fill="both", expand=True)
 top.mainloop()
