@@ -165,14 +165,40 @@ while True:
         point_2.switch_point(1)  # switches the track if its not already in the right position
         print("point_2:" + str(point_2.read()))  # returns the value of the switch
 
-    print("Throttle " + str(train_direction) + ", " + str(train_speed))
-    print("Locator: " + str(locator_input))
-
-    while GPIO.input(train_locator) == GPIO.HIGH:
+    while True:
         train.throttle(train_direction, train_speed)
         train_pneumatic.throttle(train_direction, train_speed)
 
-    train.stop()
-    train_pneumatic.stop()
-    print("stopped")
-    track_enable(0)
+        if GPIO.input(train_locator) == GPIO.LOW:
+            train.stop()
+            train_pneumatic.stop()
+            print("stopped")
+            track_enable(0)
+            break
+
+        elif GPIO.input(locator["T1"]) == GPIO.LOW:
+            print("T1")
+
+        elif GPIO.input(locator["T2"]) == GPIO.LOW:
+            print("T2")
+
+        elif GPIO.input(locator["T3"]) == GPIO.LOW:
+            print("T3")
+
+        elif GPIO.input(locator["T4"]) == GPIO.LOW:
+            print("T4")
+
+        elif GPIO.input(locator["T5"]) == GPIO.LOW:
+            print("T5")
+
+        elif GPIO.input(locator["T6"]) == GPIO.LOW:
+            print("T6")
+
+        elif GPIO.input(locator["T7"]) == GPIO.LOW:
+            print("T7")
+
+        elif GPIO.input(locator["T8"]) == GPIO.LOW:
+            print("T8")
+
+        elif GPIO.input(locator["T9"]) == GPIO.LOW:
+            print("T9")
