@@ -173,6 +173,17 @@ class Locator:
         # https://www.codegrepper.com/code-examples/python/display+a+string+in+canvas+python+tkinter
         C.create_text(self.x, self.y, fill="white", font="Times 15 italic bold", text=self.name)
 
+    def destination(self):
+        rectangle(self.x, self.y, 20, 20, 0, 0, "magenta")
+
+        # https://www.codegrepper.com/code-examples/python/display+a+string+in+canvas+python+tkinter
+        C.create_text(self.x, self.y, fill="white", font="Times 15 italic bold", text=self.name)
+
+    def location(self):
+        rectangle(self.x, self.y, 20, 20, 0, 0, "blue")
+
+        # https://www.codegrepper.com/code-examples/python/display+a+string+in+canvas+python+tkinter
+        C.create_text(self.x, self.y, fill="white", font="Times 15 italic bold", text=self.name)
 
 def emergency_stop():
     TrackPWM.stop()
@@ -198,6 +209,12 @@ T9 = Locator(860, 80, "T9")
 T1 = Locator(860, 80+200, "T1")
 T2 = Locator(860, 80+415, "T2")
 
+#entry1 = tkinter.Entry (top)
+#C.create_window(200, 140, window=entry1)
+
+#button1 = tkinter.Button(text='Get the Square Root', command=go)
+#C.create_window(200, 180, window=button1)
+
 C.pack(fill="both", expand=True)
 
 
@@ -217,10 +234,30 @@ print("point_1:" + str(point_2.read()))  # returns the value of the switch
 train = Locomotive(1)
 train_pneumatic = Locomotive(0)
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 while True:
     track_enable(1)
 
     train_speed = int(input("Speed 0-100: "))  # an input for the loco speed
+    #train_speed = int(entry1.get())
+
     train_direction = int(input("Direction 1 or 0: "))  # an input for the loco direction
 
     locator_input = input("Stop location (T1-9): ")  # an input for the desired locator
@@ -239,6 +276,42 @@ while True:
 
         point_2.switch_point(1)  # switches the track if its not already in the right position
         print("point_2:" + str(point_2.read()))  # returns the value of the switch
+
+    if locator_input == "T1":
+        T1.destination()
+        top.update()
+
+    if locator_input == "T2":
+        T2.destination()
+        top.update()
+
+    if locator_input == "T3":
+        T3.destination()
+        top.update()
+
+    if locator_input == "T4":
+        T4.destination()
+        top.update()
+
+    if locator_input == "T5":
+        T5.destination()
+        top.update()
+
+    if locator_input == "T6":
+        T6.destination()
+        top.update()
+
+    if locator_input == "T7":
+        T7.destination()
+        top.update()
+
+    if locator_input == "T8":
+        T8.destination()
+        top.update()
+
+    if locator_input == "T9":
+        T9.destination()
+        top.update()
 
     while True:
 
@@ -260,6 +333,42 @@ while True:
             T7.un_detection()
             T8.un_detection()
             T9.un_detection()
+
+            if locator_input == "T1":
+                T1.location()
+                top.update()
+
+            if locator_input == "T2":
+                T2.location()
+                top.update()
+
+            if locator_input == "T3":
+                T3.location()
+                top.update()
+
+            if locator_input == "T4":
+                T4.location()
+                top.update()
+
+            if locator_input == "T5":
+                T5.location()
+                top.update()
+
+            if locator_input == "T6":
+                T6.location()
+                top.update()
+
+            if locator_input == "T7":
+                T7.location()
+                top.update()
+
+            if locator_input == "T8":
+                T8.location()
+                top.update()
+
+            if locator_input == "T9":
+                T9.location()
+                top.update()
             break
 
         elif GPIO.input(locator["T1"]) == GPIO.LOW:
@@ -306,5 +415,3 @@ while True:
             print("T9")
             T9.detection()
             top.update()
-
-
