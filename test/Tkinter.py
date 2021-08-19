@@ -8,6 +8,114 @@ top = tkinter.Tk()
 width_window, height_window = 1024, 576
 
 C = tkinter.Canvas(top, bg="black", height=height_window, width=width_window)
+C.pack(fill="both", expand=True)
+
+
+def getorigin(eventorigin):
+    global x, y
+    x = eventorigin.x
+    y = eventorigin.y
+    print(x, y)
+
+    if 840<x<880 and 60<y<100:
+        T1.un_detection()
+        T2.un_detection()
+        T3.un_detection()
+        T4.un_detection()
+        T5.un_detection()
+        T6.un_detection()
+        T7.un_detection()
+        T8.un_detection()
+        T9.detection()
+
+    if 840<x<880 and 475<y<515:
+        T1.un_detection()
+        T2.detection()
+        T3.un_detection()
+        T4.un_detection()
+        T5.un_detection()
+        T6.un_detection()
+        T7.un_detection()
+        T8.un_detection()
+        T9.un_detection()
+
+    if 840<x<880 and 260<y<300:
+        T1.detection()
+        T2.un_detection()
+        T3.un_detection()
+        T4.un_detection()
+        T5.un_detection()
+        T6.un_detection()
+        T7.un_detection()
+        T8.un_detection()
+        T9.un_detection()
+
+    if 490<x<530 and 60<y<100:
+        T1.un_detection()
+        T2.un_detection()
+        T3.un_detection()
+        T4.un_detection()
+        T5.un_detection()
+        T6.un_detection()
+        T7.detection()
+        T8.un_detection()
+        T9.un_detection()
+
+    if 490<x<530 and 140<y<180:
+        T1.un_detection()
+        T2.un_detection()
+        T3.un_detection()
+        T4.un_detection()
+        T5.un_detection()
+        T6.un_detection()
+        T7.un_detection()
+        T8.detection()
+        T9.un_detection()
+
+    if 490<x<530 and 480<y<520:
+        T1.un_detection()
+        T2.un_detection()
+        T3.detection()
+        T4.un_detection()
+        T5.un_detection()
+        T6.un_detection()
+        T7.un_detection()
+        T8.un_detection()
+        T9.un_detection()
+
+    if 145<x<185 and 60<y<100:
+        T1.un_detection()
+        T2.un_detection()
+        T3.un_detection()
+        T4.un_detection()
+        T5.un_detection()
+        T6.detection()
+        T7.un_detection()
+        T8.un_detection()
+        T9.un_detection()
+
+    if 145<x<185 and 260<y<300:
+        T1.un_detection()
+        T2.un_detection()
+        T3.un_detection()
+        T4.un_detection()
+        T5.detection()
+        T6.un_detection()
+        T7.un_detection()
+        T8.un_detection()
+        T9.un_detection()
+
+    if 145<x<185 and 475<y<515:
+        T1.un_detection()
+        T2.un_detection()
+        T3.un_detection()
+        T4.detection()
+        T5.un_detection()
+        T6.un_detection()
+        T7.un_detection()
+        T8.un_detection()
+        T9.un_detection()
+
 
 
 def rectangle(h, k, a, b, thickness, outline, colour):
@@ -70,8 +178,10 @@ T1 = Locator(860, 80+200, "T1")
 T2 = Locator(860, 80+415, "T2")
 
 
-Button(top,text='Test',command=lambda:test()).pack(expand=True)  # https://pythonguides.com/python-tkinter-mainloop/
-Button(top,text='UN Test',command=lambda:un_test()).pack(expand=True)
+#Button(top,text='Test',command=lambda:test()).pack(expand=True)  # https://pythonguides.com/python-tkinter-mainloop/
+#Button(top,text='UN Test',command=lambda:un_test()).pack(expand=True)
 
-C.pack(fill="both", expand=True)
+
+top.bind("<Button 1>",getorigin)
+
 top.mainloop()

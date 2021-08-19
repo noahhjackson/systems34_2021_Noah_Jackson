@@ -159,37 +159,159 @@ class Locator:
         self.y = y
         self.name = name
         rectangle(self.x, self.y, 20, 20, 0, 0, "red")
-        C.create_text(self.x, self.y, fill="white", font="Times 15 italic bold", text=self.name)
+        C.create_text(self.x, self.y, fill="white", font="Times 15 bold", text=self.name)
 
     def detection(self):
         rectangle(self.x, self.y, 20, 20, 0, 0, "green")
 
         # https://www.codegrepper.com/code-examples/python/display+a+string+in+canvas+python+tkinter
-        C.create_text(self.x, self.y, fill="white", font="Times 15 italic bold", text=self.name)
+        C.create_text(self.x, self.y, fill="white", font="Times 15 bold", text=self.name)
 
     def un_detection(self):
         rectangle(self.x, self.y, 20, 20, 0, 0, "red")
 
         # https://www.codegrepper.com/code-examples/python/display+a+string+in+canvas+python+tkinter
-        C.create_text(self.x, self.y, fill="white", font="Times 15 italic bold", text=self.name)
+        C.create_text(self.x, self.y, fill="white", font="Times 15 bold", text=self.name)
 
     def destination(self):
         rectangle(self.x, self.y, 20, 20, 0, 0, "magenta")
 
         # https://www.codegrepper.com/code-examples/python/display+a+string+in+canvas+python+tkinter
-        C.create_text(self.x, self.y, fill="white", font="Times 15 italic bold", text=self.name)
+        C.create_text(self.x, self.y, fill="white", font="Times 15 bold", text=self.name)
 
     def location(self):
         rectangle(self.x, self.y, 20, 20, 0, 0, "blue")
 
         # https://www.codegrepper.com/code-examples/python/display+a+string+in+canvas+python+tkinter
-        C.create_text(self.x, self.y, fill="white", font="Times 15 italic bold", text=self.name)
+        C.create_text(self.x, self.y, fill="white", font="Times 15 bold", text=self.name)
+
+    def selection(self):
+        rectangle(self.x, self.y, 20, 20, 0, 0, "purple")
+
+        # https://www.codegrepper.com/code-examples/python/display+a+string+in+canvas+python+tkinter
+        C.create_text(self.x, self.y, fill="white", font="Times 15 bold", text=self.name)
 
 def emergency_stop():
     TrackPWM.stop()
     GPIO.output(S1, GPIO.LOW)
     print("Emergency Stop")
     exit()
+
+
+def getorigin(eventorigin):  #https://stackoverflow.com/questions/42476040/tkinter-get-mouse-coordinates-on-click-and-use-them-as-variables
+    global x, y
+    x = eventorigin.x
+    y = eventorigin.y
+    print(x, y)
+
+    if 840<x<880 and 60<y<100:  # https://www.geeksforgeeks.org/chaining-comparison-operators-python/
+        T1.un_detection()
+        T2.un_detection()
+        T3.un_detection()
+        T4.un_detection()
+        T5.un_detection()
+        T6.un_detection()
+        T7.un_detection()
+        T8.un_detection()
+        T9.selection()
+        locator_in.set("T9")
+
+    if 840<x<880 and 475<y<515:
+        T1.un_detection()
+        T2.selection()
+        T3.un_detection()
+        T4.un_detection()
+        T5.un_detection()
+        T6.un_detection()
+        T7.un_detection()
+        T8.un_detection()
+        T9.un_detection()
+        locator_in.set("T2")
+
+    if 840<x<880 and 260<y<300:
+        T1.selection()
+        T2.un_detection()
+        T3.un_detection()
+        T4.un_detection()
+        T5.un_detection()
+        T6.un_detection()
+        T7.un_detection()
+        T8.un_detection()
+        T9.un_detection()
+        locator_in.set("T1")
+
+    if 490<x<530 and 60<y<100:
+        T1.un_detection()
+        T2.un_detection()
+        T3.un_detection()
+        T4.un_detection()
+        T5.un_detection()
+        T6.un_detection()
+        T7.selection()
+        T8.un_detection()
+        T9.un_detection()
+        locator_in.set("T7")
+
+    if 490<x<530 and 140<y<180:
+        T1.un_detection()
+        T2.un_detection()
+        T3.un_detection()
+        T4.un_detection()
+        T5.un_detection()
+        T6.un_detection()
+        T7.un_detection()
+        T8.selection()
+        T9.un_detection()
+        locator_in.set("T8")
+
+    if 490<x<530 and 480<y<520:
+        T1.un_detection()
+        T2.un_detection()
+        T3.selection()
+        T4.un_detection()
+        T5.un_detection()
+        T6.un_detection()
+        T7.un_detection()
+        T8.un_detection()
+        T9.un_detection()
+        locator_in.set("T3")
+
+    if 145<x<185 and 60<y<100:
+        T1.un_detection()
+        T2.un_detection()
+        T3.un_detection()
+        T4.un_detection()
+        T5.un_detection()
+        T6.selection()
+        T7.un_detection()
+        T8.un_detection()
+        T9.un_detection()
+        locator_in.set("T6")
+
+    if 145<x<185 and 260<y<300:
+        T1.un_detection()
+        T2.un_detection()
+        T3.un_detection()
+        T4.un_detection()
+        T5.selection()
+        T6.un_detection()
+        T7.un_detection()
+        T8.un_detection()
+        T9.un_detection()
+        locator_in.set("T5")
+
+    if 145<x<185 and 475<y<515:
+        T1.un_detection()
+        T2.un_detection()
+        T3.un_detection()
+        T4.selection()
+        T5.un_detection()
+        T6.un_detection()
+        T7.un_detection()
+        T8.un_detection()
+        T9.un_detection()
+        locator_in.set("T4")
+
 
 
 # Tkinter setup ----------------------------------------------------------------------------------------------------
@@ -209,15 +331,27 @@ T9 = Locator(860, 80, "T9")
 T1 = Locator(860, 80+200, "T1")
 T2 = Locator(860, 80+415, "T2")
 
-#entry1 = tkinter.Entry (top)
-#C.create_window(200, 140, window=entry1)
+locator_in = tkinter.StringVar()
+speed_in = tkinter.StringVar()
+direction_in = tkinter.StringVar()
 
-#button1 = tkinter.Button(text='Get the Square Root', command=go)
-#C.create_window(200, 180, window=button1)
+locator_in.set("")
+speed_in.set(100)
+direction_in.set(0)
+
+entry1 = tkinter.Entry (top, textvariable=speed_in) # https://www.geeksforgeeks.org/python-tkinter-entry-widget/
+C.create_window(400, 200, window=entry1) # https://stackoverflow.com/questions/17417467/python-text-input-within-a-tkinter-canvas
+C.create_text(250, 200, fill="white", font="Times 12 bold", text='Speed (0-100)')
+
+entry2 = tkinter.Entry (top, textvariable=direction_in)
+C.create_window(400, 240, window=entry2)
+C.create_text(250, 240, fill="white", font="Times 12 bold", text='Direction (0 or 1)')
+
+entry3 = tkinter.Entry (top, textvariable=locator_in)
+C.create_window(400, 280, window=entry3)
+C.create_text(250, 280, fill="white", font="Times 12 bold", text='Locator (T1-9)')
 
 C.pack(fill="both", expand=True)
-
-
 # ------------------------- Track Sequence ------------------------------------
 
 point_1 = Point(IN1, IN2)
@@ -235,32 +369,16 @@ train = Locomotive(1)
 train_pneumatic = Locomotive(0)
 
 
+def go():
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-while True:
     track_enable(1)
 
-    train_speed = int(input("Speed 0-100: "))  # an input for the loco speed
-    #train_speed = int(entry1.get())
+    train_speed = int(str(speed_in.get()))
 
-    train_direction = int(input("Direction 1 or 0: "))  # an input for the loco direction
+    train_direction = int(str(direction_in.get()))
 
-    locator_input = input("Stop location (T1-9): ")  # an input for the desired locator
+    locator_input = str(locator_in.get())
+
     train_locator = locator[locator_input]  # a dict function that translates human readable T# values into pi GPIO
 
     if locator_input == "T8":
@@ -415,3 +533,13 @@ while True:
             print("T9")
             T9.detection()
             top.update()
+
+
+btn = tkinter.Button(top, text='Go', width=4, height=1, bd='10', command=lambda: go())
+
+# https://stackoverflow.com/questions/3704568/tkinter-button-command-activates-upon-running-program
+# https://www.geeksforgeeks.org/python-tkinter-entry-widget/
+
+btn.place(x=width_window/2+380, y=height_window/2+185)
+top.bind("<Button 1>", getorigin)
+top.mainloop()
