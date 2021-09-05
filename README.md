@@ -1,5 +1,4 @@
-# systems34
+# Systems Engineering 3/4 2021
 
-This is the repository for my VCE Systems Engineering 3/4 project. The accompanying files will be available here :)
+This is my Systems Engineering 3/4 project for 2021. It is contained within the powerpoint presentation in the repository. Also included is photos, a video, and the code that I wrote to make it work.
 
-Have a nice day 
