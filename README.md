@@ -1,6 +1,3 @@
-# Systems Engineering 3/4 2021
+# Introduction
 
-This is my Systems Engineering 3/4 project for 2021. Contained here is the code to make the project work. Here is a link to my Systems Engineering 3/4 folio https://agileitsolutions-my.sharepoint.com/:p:/g/personal/hello_noahjackson_com_au/ERzry_DfcHNAhAYD7WJHCGABNFuhwf6MAgCtAZ_Se0-AEA?e=gmIoEb
-
-And a link to a video presentation that I made regarding the product https://agileitsolutions-my.sharepoint.com/:v:/g/personal/hello_noahjackson_com_au/EaR5m9LAHh1Ftzxnvu3uwpYBpXfv3Cw5mvwoGOFSC4PGvQ?e=dI2unf
-
+In 2021 I completed VCE Systems Engineering 3/4, a year 12 subject in the Victorian Certificate of Education. I attended Padua College and was taught by Paul Barton. For this class I achieved a 48 study score due to having perfect marks on my folio, and extremely high marks on my mid and final exams. Due to this high level of performance, I was dux of my class. I also was presented with the Mick McLoughlin Principal's Choice Award 2021 (Technology) for my Systems Engineering project, and was given the opportunity to display my work at the Melbourne Mueseum as part of the 2022 VCAA Top Designs Showcase. 
